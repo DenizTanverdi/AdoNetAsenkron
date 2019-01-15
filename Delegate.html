@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    public delegate void Temsilci();<br />
+    Bu temsilciyi kullandığımız her hangi bir uygulamaya ait assembly' ı ILDASM (Intermeidate Language DisAssembly) aracı yardımıyla açarsak<br />
+    IL kodu içerisinde temsilci nesnemize ait iki metod tanımlı olduğunu görürüz.<br />
+
+    <br />
+    <img src="https://www.buraksenyurt.com/makale/images/mk135_1.gif" />
+
+    <br />
+    <br />BeginInvoke ve EndInvoke metodları tamamıyla asenkron işlemler için geliştirilmiştir.<br />
+    <br />BeginInvoke metodu, temsilcimizin çalışma zamanında işaret ettiği metodu yürürlüğe sokmak<br />
+    <br />ve o anda ortama bir IAsyncResult arayüzü nesne örneği göndermek ile yükümlüdür.<br />
+    <br />BeginInvoke metodu, temsilci nesnesinin işaret etmiş olduğu metodu ayrı bir thread içerisine atar.<br />
+    <br />EndInvoke metodu ise dikkat edecek olursanız parametre olarak IAsyncResult arayüzü tipinden bir nesne örneğini alır.<br />
+
+    <br />İşte bu nesne, BeginInvoke ile başlatılan process' ten sorumlu olan nesnedir.<br />
+    <br />Dolayısıyla EndInvoke metodu içerisinden, asenkron metodun yer aldığı process' e ait sonuçlar yakalanıp ortama aktarılabilir.<br />
+    <br />
+    <br />Callback modelinde BeginInvoke metodunun AsnycCallback temsilci tipinden olan parametresi kullanılır.<br />
+    <br />Bu nesne asenkron olarak çalıştırılan metoda ait işlemler sonlandığında otomatik olarak devreye girecek<br />
+    <br />metodu işaret eden temsilci tipinden başka bir şey değildir. En genel kullanımda bu AsyncCallback temsilcisi<br />
+    <br />EndInvoke metodunu içeren başka bir metodu temsil eder.
+
+      <br /><a href ="https://www.buraksenyurt.com/post/CallBack-Teknigi-ile-Asenkron-Metod-Yurutmek-bsenyurt-com-dan">Makalenin tamami için</ahref>
+
+</body>
+</html>
