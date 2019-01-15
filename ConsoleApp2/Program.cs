@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PoolingModel
 
 {
-        class Program
+    class Program
     {
         public static SqlConnection con;
         static void Main(string[] args)
@@ -17,7 +17,7 @@ namespace PoolingModel
             poolingModel();
 
             Console.ReadLine();
-           
+
 
         }
 
@@ -29,9 +29,9 @@ namespace PoolingModel
         /// </summary>
         public static void poolingModel()
         {
-
+            //
             con = new SqlConnection("Data Source=SEM-BILGISAYAR;Initial Catalog=test;User ID=test2;Password=test2");
-            SqlCommand cmd = new SqlCommand("Update customers set region ='qwe' ", con);
+            SqlCommand cmd = new SqlCommand("select * from  zar here kim='ercan'", con);
 
             con.Open();
 
@@ -48,7 +48,7 @@ namespace PoolingModel
             con.Close();
         }
 
-      
+
 
     }
 }

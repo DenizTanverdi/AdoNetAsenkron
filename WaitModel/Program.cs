@@ -42,17 +42,17 @@ namespace WaitModel
         public static void waitModel()
         {
 
-            con = new SqlConnection("Data Source=.;Initial Catalog=NORTHWIND;Integrated Security=True");
+            con = new SqlConnection("Data Source=SEM-BILGISAYAR;Initial Catalog=NORTHWND;User ID=test2;Password=test2;MultipleActiveResultSets=true");
             SqlCommand cmd = new SqlCommand("waitfor delay '00:00:05';Update customers set region ='qwe' ", con);
-
+            SqlCommand cmd2 = new SqlCommand("waitfor delay '00:00:07';select *FROM PRODucts  ", con);
             con.Open();
 
             //Asenckron işlemi başlatalim
             IAsyncResult res = cmd.BeginExecuteNonQuery();
-
+            IAsyncResult res2 = cmd2.BeginExecuteNonQuery();
             //waitHandle nesnesini alalim
             WaitHandle wait = res.AsyncWaitHandle;
-
+            WaitHandle wait2 = res2.AsyncWaitHandle;
 
             Console.WriteLine("Diger işlemler çalişiyor..");
 
@@ -60,8 +60,9 @@ namespace WaitModel
             //o nedenle programi bekletelim
 
             wait.WaitOne();
-
+            wait2.WaitOne();
             Console.WriteLine($"işlem tamam .Toplam Etkilenen Kayit:{cmd.EndExecuteNonQuery(res)}");
+            Console.WriteLine($"işlem tamam .Toplam Etkilenen Kayit:{cmd2.EndExecuteNonQuery(res2)}");
             cmd.Dispose();
             con.Close();
 
